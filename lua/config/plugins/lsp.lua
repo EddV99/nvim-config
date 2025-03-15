@@ -37,7 +37,34 @@ return {
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
 
+          if client.supports_method('textDocument/rename') then
+            vim.keymap.set("n", "<F2>", function()
+              vim.lsp.buf.rename(nil)
+            end)
+          end
+
+          if client.supports_method('textDocument/references') then
+            vim.keymap.set("n", "gr", function()
+              vim.lsp.buf.references()
+            end)
+          end
+
+          if client.supports_method('textDocument/codeAction') then
+            vim.keymap.set("n", "<F1>", function()
+              vim.lsp.buf.code_action()
+            end)
+          end
+
+          if client.supports_method('textDocument/documentSymbol') then
+            vim.keymap.set("n", "<F4>", function()
+              vim.lsp.buf.document_symbol()
+            end)
+          end
+
           if client.supports_method('textDocument/formatting') then
+            vim.keymap.set("n", "<F3>", function()
+              vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+            end)
             vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = args.buf,
               callback = function()
