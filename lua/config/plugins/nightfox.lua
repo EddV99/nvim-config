@@ -1,15 +1,15 @@
 return {
-  { 
-    "EdenEast/nightfox.nvim", 
+  {
+    "EdenEast/nightfox.nvim",
     lazy = false,
-    enabled=true,
-    priority=1000,
+    enabled = true,
+    priority = 1000,
+    opts = {
+      options = {
+        transparent = true,
+      }
+    },
     config = function()
-      require("nightfox").setup({
-        options = {
-          transparent = true,
-        }
-      })
       vim.cmd([[colorscheme carbonfox]])
     end,
   }
