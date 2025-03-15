@@ -1,0 +1,65 @@
+return {
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      local dap = require("dap")
+      local ui = require("dapui")
+
+      ui.setup()
+
+      ---@diagnostic disable-next-line: missing-fields
+      require("nvim-dap-virtual-text").setup({
+        enabled = true,
+        enabled_commands = true,
+        highlight_changed_variables = true,
+        highlight_new_as_changed = false,
+        show_stop_reason = true,
+        commented = false,
+        only_first_definition = true,
+        all_references = false,
+        clear_on_continue = false,
+        display_callback = function(variable, buf, stackframe, node, options)
+          -- by default, strip out new line characters
+          if options.virt_text_pos == 'inline' then
+            return ' = ' .. variable.value:gsub("%s+", " ")
+          else
+            return variable.name .. ' = ' .. variable.value:gsub("%s+", " ")
+          end
+        end,
+        virt_text_pos = vim.fn.has 'nvim-0.10' == 1 and 'inline' or 'eol',
+        -- experimental features:
+        all_frames = false,     -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
+        virt_lines = false,     -- show virtual lines instead of virtual text (will flicker!)
+        virt_text_win_col = nil -- position the virtual text at a fixed window column (starting from the first text column) ,
+        -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
+      })
+
+      -- automatically open dap ui on debugger launch
+      dap.listeners.before.attach.dapui_config = function()
+        ui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        ui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        ui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        ui.close()
+      end
+
+      vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint)
+      vim.keymap.set("n", "<leader>dr", dap.restart)
+      vim.keymap.set("n", "<leader>dc", dap.continue)
+      vim.keymap.set("n", "<F10>", dap.step_back)
+      vim.keymap.set("n", "<F11>", dap.step_into)
+      vim.keymap.set("n", "<F12>", dap.step_over)
+      vim.keymap.set("n", "<F24>", dap.step_out)
+    end,
+  }
+}
