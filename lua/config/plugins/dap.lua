@@ -5,13 +5,14 @@ return {
       "rcarriga/nvim-dap-ui",
       "theHamsta/nvim-dap-virtual-text",
       "nvim-neotest/nvim-nio",
+      "williamboman/mason.nvim",
     },
     config = function()
       local dap = require("dap")
       local ui = require("dapui")
 
+      ------ UI Setup ------
       ui.setup()
-
       ---@diagnostic disable-next-line: missing-fields
       require("nvim-dap-virtual-text").setup({
         enabled = true,
@@ -53,6 +54,7 @@ return {
         ui.close()
       end
 
+      ------ Keymaps ------
       vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint)
       vim.keymap.set("n", "<leader>dr", dap.restart)
       vim.keymap.set("n", "<leader>dc", dap.continue)
@@ -60,6 +62,32 @@ return {
       vim.keymap.set("n", "<F11>", dap.step_into)
       vim.keymap.set("n", "<F12>", dap.step_over)
       vim.keymap.set("n", "<F24>", dap.step_out)
+
+      local data_path = vim.fn.stdpath('data')
+
+      ------ Dap Setup ------
+      dap.adapters.codelldb = {
+        type = 'executable',
+        command =
+            data_path .. "/mason/packages/codelldb/extension/adapter/codelldb",
+        -- On windows you may have to uncomment this:
+        -- detached = false,
+      }
+
+      ------ per language setup ------
+      dap.configurations.cpp = {
+        {
+          name = 'Launch',
+          type = 'codelldb',
+          request = 'launch',
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          end,
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
+          args = {},
+        },
+      }
     end,
   }
 }
