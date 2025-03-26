@@ -62,6 +62,12 @@ return {
             end)
           end
 
+          if client.supports_method('textDocument/definition') then
+            vim.keymap.set("n", "gd", function()
+              vim.lsp.buf.definition()
+            end)
+          end
+
           if client.supports_method('textDocument/formatting') then
             vim.keymap.set("n", "<F3>", function()
               vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
