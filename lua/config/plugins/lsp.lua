@@ -69,7 +69,7 @@ return {
             vim.api.nvim_create_autocmd("BufWritePre", {
               buffer = args.buf,
               callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+                vim.lsp.buf.format({ async = true, bufnr = args.buf, id = client.id })
               end,
             })
           end
