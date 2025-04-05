@@ -1,16 +1,12 @@
 return {
   {
-    "EdenEast/nightfox.nvim",
+    'kepano/flexoki-neovim',
+    name = 'flexoki',
     lazy = false,
     enabled = true,
     priority = 1000,
     config = function()
-      require("nightfox").setup({
-        options = {
-          transparent = true,
-        }
-      })
-      vim.cmd.colorscheme("carbonfox")
+      vim.cmd.colorscheme("flexoki-dark")
     end,
   }
 }
