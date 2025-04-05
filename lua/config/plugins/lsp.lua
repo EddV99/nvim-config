@@ -21,7 +21,7 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "clangd" },
+        ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "clangd", "pyright" },
         automatic_installation = false,
         handlers = nil,
       })
@@ -32,6 +32,7 @@ return {
       lspconfig.ts_ls.setup({ capabilities = capabilities, })
       lspconfig.rust_analyzer.setup({ capabilities = capabilities, })
       lspconfig.clangd.setup({ capabilities = capabilities, })
+      lspconfig.pyright.setup({ capabilities = capabilities, })
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
