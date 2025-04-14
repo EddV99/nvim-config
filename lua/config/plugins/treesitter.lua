@@ -3,12 +3,13 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      require 'nvim-treesitter.install'.prefer_git = false
-      require 'nvim-treesitter.install'.compilers = { "cl", "clang", "gcc" }
+      local install = require("nvim-treesitter.install")
+      install.prefer_git = false
+      install.compilers = { "cl", "clang", "gcc" }
+      install.update({ with_sync = true })()
 
-
-
-      require 'nvim-treesitter.configs'.setup {
+      local config = require("nvim-treesitter.configs")
+      config.setup {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
         ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc" },
 
@@ -28,7 +29,7 @@ return {
           -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
           -- Using this option may slow down your editor, and you may see some duplicate highlights.
           -- Instead of true it can also be a list of languages
-          additional_vim_regex_highlighting = { 'org' },
+          additional_vim_regex_highlighting = false,
         },
       }
     end,
