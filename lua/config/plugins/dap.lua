@@ -56,12 +56,16 @@ return {
 
       ------ Keymaps ------
       vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint)
+      vim.keymap.set("n", "<leader>dl", dap.list_breakpoints)
+      vim.keymap.set("n", "<leader>df", dap.clear_breakpoints)
       vim.keymap.set("n", "<leader>dr", dap.restart)
       vim.keymap.set("n", "<leader>dc", dap.continue)
+      vim.keymap.set("n", "<leader>dx", dap.terminate)
       vim.keymap.set("n", "<F10>", dap.step_back)
       vim.keymap.set("n", "<F11>", dap.step_into)
       vim.keymap.set("n", "<F12>", dap.step_over)
       vim.keymap.set("n", "<F24>", dap.step_out)
+
 
       local data_path = vim.fn.stdpath('data')
 
@@ -81,7 +85,7 @@ return {
           type = 'codelldb',
           request = 'launch',
           program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/build/', 'file')
           end,
           cwd = '${workspaceFolder}',
           stopOnEntry = false,
