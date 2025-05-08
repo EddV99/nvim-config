@@ -40,9 +40,6 @@ vim.opt.updatetime = 250
 --Color column
 vim.opt.colorcolumn = "120"
 
--- System Clipboard
-vim.api.nvim_set_option_value("clipboard", "unnamed", {})
-
 -- Keys
 vim.keymap.set("n", "<leader>pv", ":Oil<CR>")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
