@@ -9,6 +9,7 @@ return {
       install.update({ with_sync = true })()
 
       local config = require("nvim-treesitter.configs")
+      ---@diagnostic disable-next-line: missing-fields
       config.setup {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
         ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc" },
