@@ -20,7 +20,7 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "clangd", "pyright" },
+        ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "clangd", "pyright", "glsl_analyzer" },
         automatic_installation = false,
         handlers = nil,
       })
