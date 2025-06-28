@@ -1,6 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    enabled = false,
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -59,8 +60,12 @@ return {
           end
 
           if client:supports_method('textDocument/definition') then
+            local function on_list(options)
+              vim.fn.setqflist({}, ' ', options)
+              vim.cmd.cfirst()
+            end
             vim.keymap.set("n", "gd", function()
-              vim.lsp.buf.definition()
+              vim.lsp.buf.definition({on_list = on_list})
             end)
           end
 

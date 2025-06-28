@@ -2,6 +2,7 @@ return {
   {
     'saghen/blink.cmp',
     -- optional: provides snippets for the snippet source
+    enabled = false,
     dependencies = {
       'rafamadriz/friendly-snippets',
       'neovim/nvim-lspconfig'
