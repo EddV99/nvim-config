@@ -1,3 +1,5 @@
+local flexoki_dark = require('themes.lualine.flexoki_dark')
+
 return {
   {
     'nvim-lualine/lualine.nvim',
@@ -5,7 +7,7 @@ return {
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'codedark',
+        theme = flexoki_dark,
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
