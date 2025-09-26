@@ -2,7 +2,7 @@ return {
   {
     'saghen/blink.cmp',
     -- optional: provides snippets for the snippet source
-    enabled = false,
+    enabled = true,
     dependencies = {
       'rafamadriz/friendly-snippets',
       'neovim/nvim-lspconfig'
@@ -56,13 +56,12 @@ return {
       })
 
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      local lspconfig = require('lspconfig')
-      lspconfig.lua_ls.setup({ capabilities = capabilities, })
-      lspconfig.ts_ls.setup({ capabilities = capabilities, })
-      lspconfig.rust_analyzer.setup({ capabilities = capabilities, })
-      lspconfig.clangd.setup({ capabilities = capabilities, })
-      lspconfig.pyright.setup({ capabilities = capabilities, })
-      lspconfig.glsl_analyzer.setup({ capabilities = capabilities, })
+      vim.lsp.config('clangd', { capabilities = capabilities, })
+      vim.lsp.config('glsl_analyzer', { capabilities = capabilities, })
+      vim.lsp.config('gopls', { capabilities = capabilities, })
+      vim.lsp.config('lua_ls', { capabilities = capabilities, })
+      vim.lsp.config('pyright', { capabilities = capabilities, })
+      vim.lsp.config('ts_ls', { capabilities = capabilities, })
     end,
     opts_extend = { "sources.default" },
   }
