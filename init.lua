@@ -20,8 +20,10 @@ vim.opt.expandtab = true
 -- Smart indentation
 vim.opt.smartindent = true
 
+vim.opt.signcolumn = "yes"
+
 -- Wrap text
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.textwidth = 120
 
 -- Searching
@@ -39,6 +41,9 @@ vim.opt.updatetime = 250
 
 --Color column
 vim.opt.colorcolumn = "120"
+
+-- Swap File
+vim.opt.swapfile = false
 
 -- Keys
 vim.keymap.set("n", "<leader>pv", ":Oil<CR>")
