@@ -12,7 +12,7 @@ return {
       ---@diagnostic disable-next-line: missing-fields
       config.setup {
         -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc" },
+        ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "ruby", "go" },
 
         ignore_install = {},
 
