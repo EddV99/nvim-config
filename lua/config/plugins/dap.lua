@@ -60,7 +60,11 @@ return {
       vim.keymap.set("n", "<leader>df", dap.clear_breakpoints)
       vim.keymap.set("n", "<leader>dr", dap.restart)
       vim.keymap.set("n", "<leader>dc", dap.continue)
-      vim.keymap.set("n", "<leader>dx", dap.terminate)
+      vim.keymap.set("n", "<leader>dx", function ()
+        dap.terminate()
+        ui.close()
+      end
+    )
       vim.keymap.set("n", "<F10>", dap.step_back)
       vim.keymap.set("n", "<F11>", dap.step_into)
       vim.keymap.set("n", "<F12>", dap.step_over)
@@ -78,7 +82,46 @@ return {
         -- detached = false,
       }
 
+      dap.adapters.go = {
+        type = 'executable';
+        command = data_path .. "/mason/packages/go-debug-adapter/go-debug-adapter",
+      }
+
+      dap.adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+          command = "node",
+          -- 💀 Make sure to update this path to point to your installation
+          args = { 
+            data_path .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+            "${port}"
+          },
+        }
+      }
+
       ------ per language setup ------
+      --- javascript
+      dap.configurations.javascript = {
+        {
+          name = 'Launch Selected File',
+          type = 'pwa-node',
+          request = 'launch',
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd(), 'file')
+          end,
+          cwd = '${workspaceFolder}',
+        },
+        {
+          name = "Launch Current File",
+          type = "pwa-node",
+          request = "launch",
+          program = "${file}",
+          cwd = "${workspaceFolder}",
+        },
+      }
+      --- cpp
       dap.configurations.cpp = {
         {
           name = 'Launch',
@@ -92,6 +135,34 @@ return {
           args = {},
         },
       }
+
+      --- c
+      dap.configurations.c = {
+        {
+          name = 'Launch',
+          type = 'codelldb',
+          request = 'launch',
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/build/', 'file')
+          end,
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
+          args = {},
+        },
+      }
+
+      -- go
+      dap.configurations.go = {
+        {
+          type = 'go';
+          name = 'Debug';
+          request = 'launch';
+          showLog = false;
+          program = "${file}";
+          dlvToolPath = vim.fn.exepath('dlv')  -- Adjust to where delve is installed
+        },
+      }
+
     end,
   }
 }
