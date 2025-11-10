@@ -1,0 +1,28 @@
+-- nvim keymap
+vim.keymap.set("n", "<leader>pv", ":Oil<CR>")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set("n", "<leader>fs", vim.cmd.w)
+vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- telescope keymap
+local tsbuiltins = require('telescope.builtin')
+vim.keymap.set('n', '<leader>pf', tsbuiltins.find_files, {})
+vim.keymap.set('n', '<leader>pg', tsbuiltins.git_files, {})
+vim.keymap.set('n', '<leader>ps', tsbuiltins.live_grep, {})
+vim.keymap.set('n', '<leader>pb', tsbuiltins.buffers, {})
+vim.keymap.set('n', '<leader>ph', tsbuiltins.help_tags, {})
+
+-- vim-tmux-navigator keymap
+vim.keymap.set('n', "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>")
+vim.keymap.set('n', "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>")
+vim.keymap.set('n', "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>")
+vim.keymap.set('n', "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>")
+vim.keymap.set('n', "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>")
+
+-- fugitive keymap
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
