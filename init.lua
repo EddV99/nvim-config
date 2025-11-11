@@ -6,6 +6,7 @@ require('plugins.telescope')
 require('plugins.mason')
 require('plugins.vim-tmux-navigator')
 require('plugins.treesitter')
+require('plugins.dap')
 
 
 require('config.globals')

@@ -26,3 +26,21 @@ vim.keymap.set('n', "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>")
 
 -- fugitive keymap
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+
+-- dap keymap
+local dap = require('dap')
+local ui = require("dapui")
+vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>dl", dap.list_breakpoints)
+vim.keymap.set("n", "<leader>df", dap.clear_breakpoints)
+vim.keymap.set("n", "<leader>dr", dap.restart)
+vim.keymap.set("n", "<leader>dc", dap.continue)
+vim.keymap.set("n", "<leader>dx", function()
+  dap.terminate()
+  ui.close()
+end
+)
+vim.keymap.set("n", "<F10>", dap.step_back)
+vim.keymap.set("n", "<F11>", dap.step_into)
+vim.keymap.set("n", "<F12>", dap.step_over)
+vim.keymap.set("n", "<F24>", dap.step_out)

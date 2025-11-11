@@ -1,5 +1,6 @@
 -- use nvim's built-in lsp support to enable lsps here 
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('gopls')
 
 -- setup keymapping if lsp supports actions
 vim.api.nvim_create_autocmd('LspAttach', {
