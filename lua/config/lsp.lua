@@ -1,6 +1,14 @@
--- use nvim's built-in lsp support to enable lsps here 
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('gopls')
+-- use nvim's built-in lsp support to enable lsps here
+local lsps = { 'lua_ls', 'gopls' }
+
+for _, lsp in ipairs(lsps) do
+  vim.lsp.enable(lsp)
+end
+
+local capabilities = require('blink.cmp').get_lsp_capabilities()
+vim.lsp.config('*', {
+  capabilities = capabilities
+})
 
 -- setup keymapping if lsp supports actions
 vim.api.nvim_create_autocmd('LspAttach', {

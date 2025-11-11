@@ -7,7 +7,7 @@ require('plugins.mason')
 require('plugins.vim-tmux-navigator')
 require('plugins.treesitter')
 require('plugins.dap')
-
+require('plugins.autocomplete')
 
 require('config.globals')
 require('config.options')
