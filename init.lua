@@ -1,5 +1,5 @@
 -- make sure plugins installed before configuring
-require('plugins.flexoki')
+require('plugins.colorschemes')
 require('plugins.fugative')
 require('plugins.oil')
 require('plugins.telescope')

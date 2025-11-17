@@ -1,6 +1,6 @@
 vim.pack.add({
   { src = 'https://github.com/rafamadriz/friendly-snippets' },
-  { src = 'https://github.com/saghen/blink.cmp', version = 'v1.7.0' }
+  { src = 'https://github.com/saghen/blink.cmp',            version = 'v1.7.0' }
 })
 
 local cmp = require('blink.cmp')
@@ -14,7 +14,8 @@ cmp.setup({
   appearance = {
     nerd_font_variant = 'mono'
   },
-  completion = { documentation = { auto_show = false } },
+  completion = { documentation = { auto_show = true } },
+  signature = { enabled = true },
   sources = {
     default = { 'lsp', 'path', 'snippets', 'buffer' },
   },
