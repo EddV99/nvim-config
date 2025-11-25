@@ -5,7 +5,7 @@ mason.setup()
 
 local registry = require('mason-registry')
 
-local to_install = { 'gopls', 'lua-language-server', 'delve'}
+local to_install = { 'gopls', 'lua-language-server', 'delve', 'typescript-language-server'}
 
 for _, package_name in ipairs(to_install) do
   if not registry.is_installed(package_name) then
