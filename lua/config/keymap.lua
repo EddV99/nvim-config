@@ -9,6 +9,18 @@ vim.keymap.set("x", "<leader>p", "\"_dP")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
+-- harpoon keymap
+local harpoon = require('harpoon')
+vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<M-1>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<M-2>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<M-3>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<M-4>", function() harpoon:list():select(4) end)
+-- Toggle previous & next buffers stored within Harpoon list
+-- vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+-- vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
 -- telescope keymap
 local tsbuiltins = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', tsbuiltins.find_files, {})
