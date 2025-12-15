@@ -1,5 +1,5 @@
 -- use nvim's built-in lsp support to enable lsps here
-local lsps = { 'lua_ls', 'gopls', 'ts_ls' }
+local lsps = { 'lua_ls', 'gopls', 'ts_ls', 'clangd' }
 
 for _, lsp in ipairs(lsps) do
   vim.lsp.enable(lsp)
