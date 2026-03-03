@@ -9,6 +9,7 @@ require('plugins.treesitter')
 require('plugins.dap')
 require('plugins.autocomplete')
 require('plugins.harpoon')
+require('plugins.gitsigns')
 
 require('config.globals')
 require('config.options')
