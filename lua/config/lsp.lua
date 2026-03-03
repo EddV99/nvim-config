@@ -16,6 +16,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if not client then return end
 
+    vim.keymap.set("n", "gw", function ()
+      vim.diagnostic.open_float(nil, { focus = false, max_width = 90 })
+    end)
+
     if client:supports_method('textDocument/rename') then
       vim.keymap.set("n", "<F2>", function()
         vim.lsp.buf.rename(nil)
@@ -70,7 +74,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- lsp diagnostic config
 vim.diagnostic.config({
-  virtual_text = {
-    current_line = true,
+  underline = true,
+  virtual_text = false,
+  float = {
+    border = {
+      "╔",
+      "═",
+      "╗",
+      "║",
+      "╝",
+      "═",
+      "╚",
+      "║"
+    },
+    source = true,
+    update_in_insert = true,
+    severity_sort = true,
   },
 })
