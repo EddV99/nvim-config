@@ -4,4 +4,4 @@ vim.pack.add({
 
 local treesitter = require("nvim-treesitter")
 
-treesitter.install({ "c", "cpp", "lua", "vim", "vimdoc", "go" })
+treesitter.install({ "c", "cpp", "lua", "vim", "vimdoc", "go", "markdown"})
